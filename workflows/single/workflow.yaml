@@ -1,0 +1,71 @@
+workflow:
+    version: 0.3.0
+    inputs:
+      files:
+        - $[[infile]]
+      parameters:
+        imageType: $[[imageType]]
+        holeFillArea: $[[holeFillArea]]
+        maxProportion: $[[maxProportion]]
+    workflow:
+      type: serial
+      specification:
+        steps:
+          - environment: 'heikomueller/pie:0.1.2.flowserv'
+            commands:
+              - pie run single
+                    --image_type "${imageType}"
+                    --hole_fill_area "${holeFillArea}"
+                    --max_proportion ${maxProportion}
+                    $[[cleanup ? --cleanup]]
+                    --save_extras
+                    /data/IN/image.tif /data/OUT
+    outputs:
+      files:
+       - data/OUT/
+parameters:
+    - id: 'infile'
+      name: 'Input Image File'
+      dtype: 'file'
+      target: 'data/IN/image.tif'
+    - id: 'imageType'
+      name: 'Image Type'
+      description: 'The type of micrscopy used to generate images'
+      dtype: 'enum'
+      defaultValue: 'brightfield'
+      values:
+          - name: 'Brightfield'
+            value: 'brightfield'
+            isDefault: true
+          - name: 'Phasecontrast'
+            value: 'phasecontrast'
+            isDefault: false
+      isRequired: true
+    - id: 'holeFillArea'
+      name: 'Hole Fill Area'
+      description: 'Size (in pixels) of the largest empty space between cells'
+      dtype: 'int'
+      defaultValue: 'inf'
+    - id: 'cleanup'
+      name: 'Cleanup'
+      description: 'Perform cleanup of spurious pieces of background attached to colonies.'
+      dtype: 'bool'
+      defaultValue: true
+    - id: 'maxProportion'
+      name: 'Max. Proportion'
+      description: 'The max proportion of the edge of a detected colony "pie piece" that is allowed to not touch a neighboring "pie piece".'
+      dtype: 'float'
+      defaultValue: 0.75
+      range: '[0,1]'
+outputs:
+    - source: 'data/OUT/boundary_ims/image.jpg'
+      title: 'Boundary Image'
+      caption: 'The image created by PIE that has colonies outlined.'
+      format:
+          type: 'image'
+    - source: 'data/OUT/single_im_colony_properties/image.csv'
+      title: 'Cells'
+      caption: 'Table of detected cells and their areas and positions.'
+      format:
+          type: 'csv'
+          header: true
