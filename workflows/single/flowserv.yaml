@@ -1,5 +1,5 @@
 name: 'Colony Recognition Page'
 description: 'Analyze single colony image using PIE'
-instructions: 'flowserv/workflows/single/instructions.md'
+instructions: 'workflows/single/instructions.md'
 files: []
-specfile: 'flowserv/workflows/single/workflow.yaml'
+specfile: 'workflows/single/workflow.yaml'
