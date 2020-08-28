@@ -19,7 +19,7 @@ workflow:
                     --max_proportion ${maxProportion}
                     $[[cleanup ? --cleanup]]
                     --save_extras
-                    /data/IN/image.tif /data/OUT
+                    data/IN/image.tif data/OUT
     outputs:
       files:
        - data/OUT/
