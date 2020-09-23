@@ -14,11 +14,10 @@ workflow:
           - environment: 'heikomueller/pie:0.1.2.flowserv'
             commands:
               - pie colony_recognition
-                    --image_type "${imageType}"
-                    --hole_fill_area "${holeFillArea}"
-                    --max_proportion ${maxProportion}
+                    --image_type="${imageType}"
+                    --hole_fill_area="${holeFillArea}"
+                    --max_proportion=${maxProportion}
                     $[[cleanup ? --cleanup]]
-                    --save_extras
                     data/IN/image.tif data/OUT
     outputs:
       files:
