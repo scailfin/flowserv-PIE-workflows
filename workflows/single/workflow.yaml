@@ -23,14 +23,14 @@ workflow:
       files:
        - data/OUT/
 parameters:
-    - id: 'infile'
-      name: 'Input Image File'
+    - name: 'infile'
+      label: 'Input Image File'
       dtype: 'file'
       target: 'data/IN/image.tif'
-    - id: 'imageType'
-      name: 'Image Type'
-      description: 'The type of micrscopy used to generate images'
-      dtype: 'enum'
+    - name: 'imageType'
+      label: 'Image Type'
+      help: 'The type of micrscopy used to generate images'
+      dtype: 'select'
       defaultValue: 'brightfield'
       values:
           - name: 'Brightfield'
@@ -40,19 +40,19 @@ parameters:
             value: 'phasecontrast'
             isDefault: false
       isRequired: true
-    - id: 'holeFillArea'
-      name: 'Hole Fill Area'
-      description: 'Size (in pixels) of the largest empty space between cells'
+    - name: 'holeFillArea'
+      label: 'Hole Fill Area'
+      help: 'Size (in pixels) of the largest empty space between cells'
       dtype: 'int'
       defaultValue: 'inf'
-    - id: 'cleanup'
-      name: 'Cleanup'
-      description: 'Perform cleanup of spurious pieces of background attached to colonies.'
+    - name: 'cleanup'
+      label: 'Cleanup'
+      help: 'Perform cleanup of spurious pieces of background attached to colonies.'
       dtype: 'bool'
       defaultValue: true
-    - id: 'maxProportion'
-      name: 'Max. Proportion'
-      description: 'The max proportion of the edge of a detected colony "pie piece" that is allowed to not touch a neighboring "pie piece".'
+    - name: 'maxProportion'
+      label: 'Max. Proportion'
+      help: 'The max proportion of the edge of a detected colony "pie piece" that is allowed to not touch a neighboring "pie piece".'
       dtype: 'float'
       defaultValue: 0.75
       range: '[0,1]'
