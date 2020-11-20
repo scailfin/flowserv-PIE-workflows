@@ -58,11 +58,13 @@ parameters:
       range: '[0,1]'
 outputs:
     - source: 'data/OUT/boundary_ims/image.jpg'
+      key: 'boundary-image'
       title: 'Boundary Image'
       caption: 'The image created by PIE that has colonies outlined.'
       format:
           type: 'image'
     - source: 'data/OUT/single_im_colony_properties/image.csv'
+      key: 'colony-properties'
       title: 'Cells'
       caption: 'Table of detected cells and their areas and positions.'
       format:
