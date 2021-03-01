@@ -1,0 +1,2 @@
+- image: 'pie:0.1.3.flowserv'
+  worker: 'docker'
